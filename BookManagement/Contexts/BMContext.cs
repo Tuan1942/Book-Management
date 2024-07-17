@@ -22,7 +22,6 @@ namespace BookManagement.Contexts
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.Password).IsRequired().HasMaxLength(50);
 
                 entity.HasMany(e => e.UserRoles)
                       .WithOne(ur => ur.User)
