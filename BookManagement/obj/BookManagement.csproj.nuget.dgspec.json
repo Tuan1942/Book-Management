@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement.csproj": {}
+    "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\BookManagement.csproj": {}
   },
   "projects": {
-    "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement.csproj": {
+    "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\BookManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement.csproj",
+        "projectUniqueName": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\BookManagement.csproj",
         "projectName": "BookManagement",
-        "projectPath": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement.csproj",
+        "projectPath": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\BookManagement.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\Visual Studio 2022\\BookManagement\\obj\\",
+        "outputPath": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,28 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
