@@ -3,6 +3,8 @@ using BookManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf;
 
 namespace BookManagement.Controllers
 {
@@ -50,12 +52,29 @@ namespace BookManagement.Controllers
 
             return Ok(new { Message = "File uploaded successfully.", FilePath = filePath });
         }
+        private async Task SplitAndSavePdfPages(string filePath, string outputFolder)
+        {
+            using (var inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
+            {
+                for (int pageIndex = 0; pageIndex < inputDocument.PageCount; pageIndex++)
+                {
+                    var outputDocument = new PdfDocument();
+                    outputDocument.AddPage(inputDocument.Pages[pageIndex]);
+
+                    var outputFilePath = Path.Combine(outputFolder, $"{pageIndex + 1}.pdf");
+                    outputDocument.Save(outputFilePath);
+                }
+            }
+
+            // Delete the original file after splitting
+            System.IO.File.Delete(filePath);
+        }
 
         /// <summary>
         /// Check if folder has file or not
         /// </summary>
         /// <param name="inputFolderName"></param>
-        /// <returns></returns>
+        /// <returns>true if folder has file, false if folder emty.</returns>
         public bool CheckFile(string inputFolderName)
         {
             if (Directory.Exists(inputFolderName))

@@ -10,14 +10,9 @@ namespace BookManagement.Models
         public string Type { get; set; }
         public DateTime? CreateAt { get; set; }
     }
-    public class BookModify
+    public class BookUpdateModel
     {
         public BookModel bookModel { get; set; }
         public string description { get; set; }
-    }
-    public class FileModel
-    {
-        public IFormFile formFile { get; set; }
-        public string Name { get; set; }
     }
 }

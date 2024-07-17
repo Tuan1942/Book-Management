@@ -38,6 +38,29 @@ namespace BookManagement.Controllers
             return Ok(bookModels);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetBook(int id)
+        {
+            return Ok(_context.Books.FirstOrDefault(b => b.Id == id));
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string field, string value)
+        {
+            if (value == null) return BadRequest("Value cannot be emty.");
+            if (field == null) return BadRequest("Field cannot be emty.");
+            switch (field)
+            {
+                case "Name":
+                    return Ok(_context.Books.Where(b => b.Name.Contains(value)));
+                case "Artist":
+                    return Ok(_context.Books.Where(b => b.Artist.Contains(value)));
+                case "Type":
+                    return Ok(_context.Books.Where(b => b.Type == value));
+                default: return BadRequest("This field is not exist.");
+            }
+        }
+
         [Authorize(Policy = "AdminOnly")]
         [HttpPost("newBook")]
         public async Task<IActionResult> NewBookAsync([FromBody] BookModel bookModel)
@@ -62,18 +85,18 @@ namespace BookManagement.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
-        [HttpPut("modify")]
-        public async Task<IActionResult> ModifyBookAsync([FromBody] BookModify bookModify)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateBookAsync([FromBody] BookUpdateModel bookUpdate)
         {
-            if (bookModify.bookModel == null) return BadRequest("Book cannot be null.");
+            if (bookUpdate.bookModel == null) return BadRequest("Book cannot be null.");
 
-            var book = _context.Books.FirstOrDefault(b => b.Name == bookModify.bookModel.Name);
+            var book = _context.Books.FirstOrDefault(b => b.Name == bookUpdate.bookModel.Name);
 
             if (book == null) return BadRequest("Book not found.");
 
-            book.Name = bookModify.bookModel.Name;
-            book.Artist = bookModify.bookModel.Artist;
-            book.Type = bookModify.bookModel.Type;
+            book.Name = bookUpdate.bookModel.Name;
+            book.Artist = bookUpdate.bookModel.Artist;
+            book.Type = bookUpdate.bookModel.Type;
             _context.Update(book);
             await _context.SaveChangesAsync();
 
@@ -82,17 +105,17 @@ namespace BookManagement.Controllers
                 BookId = book.Id,
                 ModifiedBy = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value),
                 ModifiedAt = DateTime.Now,
-                ChangeDescription = bookModify.description
+                ChangeDescription = bookUpdate.description
             };
 
             _context.ModifyHistories.Add(modifyHistory);
             await _context.SaveChangesAsync();
 
-            return Ok(bookModify);
+            return Ok(bookUpdate);
         }
 
         [Authorize(Policy = "AdminOnly")]
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBookAsync(int id)
         {
             var book = _context.Books.FirstOrDefault(b => b.Id == id);
@@ -100,9 +123,10 @@ namespace BookManagement.Controllers
             {
                 return BadRequest("Book not found");
             }
+            Directory.Delete(Path.Combine(FolderPath, book.Name), true);
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
-            return Ok("Deleted");
+            return Ok($"{book.Name} has been deleted");
         }
     }
 }

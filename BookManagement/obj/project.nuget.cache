@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "131G5xsTJmA=",
+  "dgSpecHash": "fNdNRhFXsJo=",
   "success": true,
   "projectFilePath": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\BookManagement.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\pdfsharp\\6.1.1\\pdfsharp.6.1.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",
