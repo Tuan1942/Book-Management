@@ -63,6 +63,7 @@ namespace BookManagement.Contexts
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.Artist).HasMaxLength(100);
                 entity.Property(e => e.Type).HasMaxLength(50);
                 entity.Property(e => e.CreateAt).IsRequired();
@@ -143,7 +144,6 @@ namespace BookManagement.Contexts
         public string Artist { get; set; }
         public string Type { get; set; }
         public DateTime CreateAt { get; set; }
-
         public ICollection<ModifyHistory> ModifyHistories { get; set; }
         public ICollection<UserBookmark> UserBookmarks { get; set; }
     }

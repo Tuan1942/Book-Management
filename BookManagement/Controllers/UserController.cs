@@ -149,7 +149,7 @@ namespace BookManagement.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Username)
             };
-            var userRoles = GetUserRolesFromDatabase(user.Id);
+            var userRoles = GetUserRoles(user.Id);
 
             foreach (var role in userRoles)
             {
@@ -167,7 +167,7 @@ namespace BookManagement.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        private List<string> GetUserRolesFromDatabase(int userId)
+        private List<string> GetUserRoles(int userId)
         {
             var roles = new List<string>();
             var userRoles = _context.UserRoles.Where(ur => ur.UserId == userId).ToList();

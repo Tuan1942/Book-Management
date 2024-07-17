@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\models\\bookmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:models\\bookmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\contexts\\bmcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:contexts\\bmcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,50 +42,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "BookController.cs",
+              "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\BookController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BookController.cs",
+              "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\BookController.cs",
+              "RelativeToolTip": "Controllers\\BookController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T08:33:04.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookModel.cs",
+              "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Models\\BookModel.cs",
+              "RelativeDocumentMoniker": "Models\\BookModel.cs",
+              "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Models\\BookModel.cs",
+              "RelativeToolTip": "Models\\BookModel.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAQwA4AAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T07:04:36.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FileController.cs",
+              "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\FileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FileController.cs",
+              "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\FileController.cs",
+              "RelativeToolTip": "Controllers\\FileController.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAuwBIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T04:51:30.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "UserModel.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Models\\UserModel.cs",
               "RelativeDocumentMoniker": "Models\\UserModel.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Models\\UserModel.cs",
               "RelativeToolTip": "Models\\UserModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAIAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T03:35:46.594Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAAwHgAAAASAAAA",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAAAGsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T03:07:57.259Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAkwCkAAAAjAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAArwD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T02:48:31.139Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -86,13 +137,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "BMContext.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Contexts\\BMContext.cs",
               "RelativeDocumentMoniker": "Contexts\\BMContext.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Contexts\\BMContext.cs",
               "RelativeToolTip": "Contexts\\BMContext.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAAwHIAAAAAAAAA",
+              "ViewState": "AQIAAJgAAAAAAAAAAAAAAKgAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T02:14:31.772Z",
               "EditorCaption": ""
