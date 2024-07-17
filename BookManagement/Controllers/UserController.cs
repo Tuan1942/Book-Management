@@ -105,26 +105,23 @@ namespace BookManagement.Controllers
         [Authorize]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var username = HttpContext.User.Identity.Name;
 
-            if (string.IsNullOrEmpty(userIdClaim))
+            var roles = HttpContext.User.FindAll(ClaimTypes.Role)?.Select(c => c.Value).ToList();
+
+            return Ok(new
             {
-                return NotFound("Không tìm thấy tài khoản!");
-            }
-
-            if (!int.TryParse(userIdClaim, out var userId))
-            {
-                return BadRequest("Người dùng không hợp lệ.");
-            }
-
-            var user = await _context.Users.FindAsync(userId);
-
-            if (user == null)
-            {
-                return NotFound("Không tìm thấy tài khoản!");
-            }
-
-            return Ok(user);
+                Id = userId,
+                Username = username,
+                Roles = roles
+            });
+        }
+        [HttpGet("admin-only")]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> GetAdminOnlyData()
+        {
+            return Ok(new { Message = "This data is accessible only by admin." });
         }
 
         private string HashPassword(string password)
@@ -147,9 +144,17 @@ namespace BookManagement.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[]{
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
             };
+            var userRoles = GetUserRolesFromDatabase(user.Id);
+
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var token = new JwtSecurityToken(
                 issuer: configuration["Jwt:Issuer"],
@@ -158,9 +163,19 @@ namespace BookManagement.Controllers
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
-                );
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        private List<string> GetUserRolesFromDatabase(int userId)
+        {
+            var roles = new List<string>();
+            var userRoles = _context.UserRoles.Where(ur => ur.UserId == userId).ToList();
+            foreach (var userRole in userRoles)
+            {
+                roles.Add(_context.Roles.First(r => r.Id == userRole.RoleId).Name);
+            }
+            return roles;
         }
 
         [HttpGet("list")]
