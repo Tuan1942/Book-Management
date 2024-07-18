@@ -61,8 +61,8 @@ namespace BookManagement.Controllers
             }
         }
 
-        [Authorize(Policy = "AdminOnly")]
-        [HttpPost("newBook")]
+        //[Authorize(Policy = "AdminOnly")]
+        [HttpPost]
         public async Task<IActionResult> NewBookAsync([FromBody] BookModel bookModel)
         {
             if (_context.Books.FirstOrDefault(b => b.Name == bookModel.Name) != null) return BadRequest("Book already exist!");
@@ -127,6 +127,36 @@ namespace BookManagement.Controllers
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
             return Ok($"{book.Name} has been deleted");
+        }
+
+        [Authorize]
+        [HttpPost("Bookmark")]
+        public async Task<IActionResult> Bookmark(int bookId, int page)
+        {
+            if (bookId == 0 || page == 0) 
+                return BadRequest("Value invalid!");
+            var book = _context.Books.FirstOrDefault(book => book.Id == bookId);
+            if (book == null) return BadRequest("Book not found.");
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var bookmark = _context.UserBookmarks.FirstOrDefault(b => b.BookId == bookId && b.UserId == int.Parse(userId));
+            if (bookmark == null)
+            {
+                var nbookmark = new UserBookmark
+                {
+                    BookId = bookId,
+                    UserId = int.Parse(userId),
+                    Page = page
+                };
+                _context.UserBookmarks.Add(nbookmark);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                bookmark.Page = page;
+                _context.UserBookmarks.Update(bookmark);
+                await _context.SaveChangesAsync();
+            }
+            return Ok($"Updated bookmark {book.Name} at page {page}.");
         }
     }
 }

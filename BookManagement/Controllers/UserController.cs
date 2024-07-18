@@ -161,7 +161,7 @@ namespace BookManagement.Controllers
                 audience: configuration["Jwt:Audience"],
                 claims: claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.UtcNow.AddHours(16),
                 signingCredentials: credentials
             );
 
