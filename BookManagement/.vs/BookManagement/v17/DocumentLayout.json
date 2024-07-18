@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\hubs\\notifyhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:hubs\\notifyhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7C7CE46F-5CE7-4C7D-8543-24725B9DA273}|BookManagement.csproj|d:\\source\\visual studio 2022\\bookmanagement\\bookmanagement\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,20 +58,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-07-18T04:20:26.636Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "NotifyHub.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Hubs\\NotifyHub.cs",
               "RelativeDocumentMoniker": "Hubs\\NotifyHub.cs",
@@ -92,8 +92,7 @@
               "RelativeToolTip": "Controllers\\BookController.cs",
               "ViewState": "AQIAAEEAAAAAAAAAAAAkwGUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T08:33:04.801Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T08:33:04.801Z"
             },
             {
               "$type": "Document",
@@ -105,8 +104,7 @@
               "RelativeToolTip": "Models\\BookModel.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAuwBEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T07:04:36.927Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T07:04:36.927Z"
             },
             {
               "$type": "Document",
@@ -116,7 +114,7 @@
               "RelativeDocumentMoniker": "Controllers\\FileController.cs",
               "ToolTip": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Controllers\\FileController.cs",
               "RelativeToolTip": "Controllers\\FileController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAYwBYAAABTAAAA",
+              "ViewState": "AQIAAJsAAAAAAAAAAAAswB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T04:51:30.4Z",
               "EditorCaption": ""
@@ -147,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\source\\Visual Studio 2022\\BookManagement\\BookManagement\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -155,8 +153,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAADkAAAAAAAAAAAAAAEUAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T02:48:31.139Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T02:48:31.139Z"
             },
             {
               "$type": "Document",

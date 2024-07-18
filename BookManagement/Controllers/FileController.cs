@@ -8,6 +8,8 @@ using PdfSharp.Pdf;
 using DocumentFormat.OpenXml.Packaging;
 using BookManagement.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace BookManagement.Controllers
 {
@@ -43,33 +45,59 @@ namespace BookManagement.Controllers
 
             var bookPath = Path.Combine(FolderPath, book.Name);
 
-            if (CheckFile(bookPath))
+            if (Directory.EnumerateFiles(bookPath).Any())
             {
                 return BadRequest("Book file already exist, use update instead!");
             }
 
             var fileExtension = Path.GetExtension(file.formFile.FileName);
-            var filePath = Path.Combine(bookPath, Path.GetTempFileName() + fileExtension);
+            var filePath = Path.Combine(bookPath, Path.GetRandomFileName() + fileExtension);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.formFile.CopyToAsync(stream);
             }
 
-            switch (fileExtension)
+            switch (fileExtension.ToLower())
             {
                 case ".pdf":
-                    await SplitAndSavePdfPages(filePath, bookPath);
+                    SplitAndSavePdfPages(filePath, bookPath);
                     break;
                 case ".doc":
                 case ".docx":
-                case "xlsx":
+                    break;
+                case ".xlsx":
                 default: return BadRequest($"File type { fileExtension } not supported.");
             }
 
             book.Type = fileExtension;
             _context.Update(book);
             await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "File uploaded successfully.", Path = bookPath });
+        }
+        [HttpPost("raw")]
+        public async Task<IActionResult> Upload1(FileModel file)
+        {
+            if (file == null || file.formFile.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            var bookPath = Path.Combine(FolderPath, "Testing");
+
+            if (Directory.EnumerateFiles(bookPath).Any())
+            {
+                return BadRequest("Book file already exist, use update instead!");
+            }
+
+            var fileExtension = Path.GetExtension(file.formFile.FileName);
+            var filePath = Path.Combine(bookPath, "Testing" + fileExtension);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.formFile.CopyToAsync(stream);
+            }
 
             return Ok(new { Message = "File uploaded successfully.", Path = bookPath });
         }
@@ -179,21 +207,16 @@ namespace BookManagement.Controllers
             // Thêm các loại mime type khác nếu cần
         };
         }
-        /// <summary>
-        /// Check if folder has file or not
-        /// </summary>
-        /// <param name="inputFolderName"></param>
-        /// <returns>true if folder has file, false if folder emty.</returns>
-        public bool CheckFile(string inputFolderName)
-        {
-            if (Directory.Exists(inputFolderName))
-            {
-                var fileCount = Directory.GetFiles(inputFolderName).Length;
-                if (fileCount > 0) return true;
-            }
-            return false;
-        }
-        private async Task SplitAndSavePdfPages(string filePath, string outputFolder)
+        //public bool CheckFile(string inputFolderName)
+        //{
+        //    if (Directory.Exists(inputFolderName))
+        //    {
+        //        var fileCount = Directory.GetFiles(inputFolderName).Length;
+        //        if (fileCount > 0) return true;
+        //    }
+        //    return false;
+        //}
+        private void SplitAndSavePdfPages(string filePath, string outputFolder)
         {
             using (var inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
             {
@@ -209,6 +232,10 @@ namespace BookManagement.Controllers
 
             System.IO.File.Delete(filePath);
         }
+        private void SaveWordFile(string filePath, string outputFolder)
+        {
+        }
+
         private async Task<int> CheckFilePage(IFormFile formFile)
         {
             var tempFilePath = Path.GetTempFileName();

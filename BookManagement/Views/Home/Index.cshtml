@@ -14,6 +14,13 @@
         .build();
 
     connection.on("ReceiveMessage", function (message) {
+        switch (message)
+        {
+            case "Updated":
+                location.reload();
+                break;
+            default: break;
+        }
         console.log(message);
     });
 
