@@ -28,15 +28,15 @@ namespace BookManagement.Controllers
             _hubContext = hubContext;
         }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload(FileModel file)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Upload(int id, IFormFile file)
         {
-            if (file == null || file.formFile.Length == 0)
+            if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
 
-            var book = _context.Books.FirstOrDefault(b => b.Name == file.Name);
+            var book = _context.Books.FirstOrDefault(b => b.Id == id);
 
             if (book == null)
             {
@@ -50,12 +50,12 @@ namespace BookManagement.Controllers
                 return BadRequest("Book file already exist, use update instead!");
             }
 
-            var fileExtension = Path.GetExtension(file.formFile.FileName);
+            var fileExtension = Path.GetExtension(file.FileName);
             var filePath = Path.Combine(bookPath, Path.GetRandomFileName() + fileExtension);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await file.formFile.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
             }
 
             switch (fileExtension.ToLower())

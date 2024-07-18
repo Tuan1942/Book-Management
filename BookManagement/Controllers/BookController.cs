@@ -130,7 +130,7 @@ namespace BookManagement.Controllers
         }
 
         [Authorize]
-        [HttpPost("Bookmark")]
+        [HttpPost("Bookmark/{bookId}/{page}")]
         public async Task<IActionResult> Bookmark(int bookId, int page)
         {
             if (bookId == 0 || page == 0) 
@@ -157,6 +157,20 @@ namespace BookManagement.Controllers
                 await _context.SaveChangesAsync();
             }
             return Ok($"Updated bookmark {book.Name} at page {page}.");
+        }
+
+        [Authorize]
+        [HttpGet("Bookmark/{bookId}")]
+        public async Task<IActionResult> GetBookmark(int bookId)
+        {
+            if (bookId == 0)
+                return BadRequest("Value invalid!");
+            var book = _context.Books.FirstOrDefault(book => book.Id == bookId);
+            if (book == null) return BadRequest("Book not found.");
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var bookmark = _context.UserBookmarks.FirstOrDefault(b => b.BookId == bookId && b.UserId == int.Parse(userId));
+            if (bookmark == null) return NotFound("No bookmark found.");
+            return Ok(bookmark.Page);
         }
     }
 }
