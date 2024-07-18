@@ -6,3 +6,22 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+<script>
+    const bookId = "2"; // Example book ID
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl(`/notifyHub?bookId=${bookId}`)
+        .build();
+
+    connection.on("ReceiveMessage", function (message) {
+        console.log(message);
+    });
+
+    connection.start()
+        .then(function () {
+            console.log("Connected to SignalR hub");
+        })
+        .catch(function (err) {
+            console.error(err.toString());
+        });
+</script>

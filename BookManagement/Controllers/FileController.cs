@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf;
+using DocumentFormat.OpenXml.Packaging;
+using BookManagement.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BookManagement.Controllers
 {
@@ -15,9 +18,12 @@ namespace BookManagement.Controllers
     {
         private readonly BMContext _context;
         private readonly string FolderPath = "Books\\";
-        public FileController(BMContext context)
+        private delegate Task<IActionResult> UpdateFile();
+        private readonly IHubContext<NotifyHub> _hubContext;
+        public FileController(BMContext context, IHubContext<NotifyHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [HttpPost("upload")]
@@ -49,7 +55,17 @@ namespace BookManagement.Controllers
             {
                 await file.formFile.CopyToAsync(stream);
             }
-            await SplitAndSavePdfPages(filePath, bookPath);
+
+            switch (fileExtension)
+            {
+                case ".pdf":
+                    await SplitAndSavePdfPages(filePath, bookPath);
+                    break;
+                case ".doc":
+                case ".docx":
+                case "xlsx":
+                default: return BadRequest($"File type { fileExtension } not supported.");
+            }
 
             book.Type = fileExtension;
             _context.Update(book);
@@ -134,13 +150,16 @@ namespace BookManagement.Controllers
             var filePattern = $"{pageIndex}{book.Type}";
             var files = Directory.GetFiles(bookPath, filePattern);
             var filePath = Path.Combine(bookPath, filePattern);
+
+            if (await CheckFilePage(formFile) != 1) return BadRequest("Page must be '1'");
+
             System.IO.File.Delete(filePath);
-
-
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await formFile.CopyToAsync(stream);
             }
+
+            await NotifyHub.NotifyBookUpdate(bookId.ToString(), _hubContext);
 
             return Ok(new { Message = "File updated successfully.", FilePath = filePath });
         }
@@ -188,10 +207,56 @@ namespace BookManagement.Controllers
                 }
             }
 
-            // Delete the original file after splitting
             System.IO.File.Delete(filePath);
         }
+        private async Task<int> CheckFilePage(IFormFile formFile)
+        {
+            var tempFilePath = Path.GetTempFileName();
+            using (var stream = new FileStream(tempFilePath, FileMode.Create))
+            {
+                await formFile.CopyToAsync(stream);
+            }
 
+            var extension = Path.GetExtension(formFile.FileName).ToLowerInvariant();
+            int pageCount;
+            switch (extension)
+            {
+                case ".pdf":
+                    pageCount = PdfReader.Open(tempFilePath, PdfDocumentOpenMode.Import).PageCount;
+                    break;
+                case ".doc":
+                case ".docx":
+                    pageCount = CountDocxPages(tempFilePath);
+                    break;
+                case ".xlsx":
+                    pageCount = CountXlsxPages(tempFilePath);
+                    break;
+                default:
+                    pageCount = 0;
+                    break;
+            }
+
+            System.IO.File.Delete(tempFilePath);
+            return pageCount;
+        }
+
+        private int CountDocxPages(string filePath)
+        {
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(filePath, false))
+            {
+                int pageCount = doc.ExtendedFilePropertiesPart.Properties.Pages.Text != null ?
+                    int.Parse(doc.ExtendedFilePropertiesPart.Properties.Pages.Text) : 0;
+                return pageCount;
+            }
+        }
+
+        private int CountXlsxPages(string filePath)
+        {
+            using (SpreadsheetDocument doc = SpreadsheetDocument.Open(filePath, false))
+            {
+                return doc.WorkbookPart.Workbook.Sheets.Count();
+            }
+        }
     }
 }
 

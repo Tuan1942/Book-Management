@@ -1,4 +1,5 @@
 using BookManagement.Contexts;
+using BookManagement.Hubs;
 using BookManagement.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BMContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddSignalR();
 
 var key = Encoding.ASCII.GetBytes(configuration["Jwt:SecretKey"]);
 builder.Services.AddAuthentication(options =>
@@ -64,5 +66,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<NotifyHub>("/notifyHub");
 
 app.Run();
