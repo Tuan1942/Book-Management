@@ -29,11 +29,17 @@ namespace BookManagement.Contexts
 
                 entity.HasMany(e => e.ModifyHistories)
                       .WithOne(mh => mh.User)
-                      .HasForeignKey(mh => mh.ModifiedBy);
+                      .HasForeignKey(mh => mh.ModifiedBy)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasMany(e => e.UserBookmarks)
                       .WithOne(ub => ub.User)
                       .HasForeignKey(ub => ub.UserId);
+
+                entity.HasMany(e => e.Books)
+                      .WithOne(b => b.User)
+                      .HasForeignKey(b => b.CreateBy)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -70,7 +76,8 @@ namespace BookManagement.Contexts
 
                 entity.HasMany(e => e.ModifyHistories)
                       .WithOne(mh => mh.Book)
-                      .HasForeignKey(mh => mh.BookId);
+                      .HasForeignKey(mh => mh.BookId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasMany(e => e.UserBookmarks)
                       .WithOne(ub => ub.Book)
@@ -81,11 +88,12 @@ namespace BookManagement.Contexts
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.ModifiedAt).IsRequired();
-                entity.Property(e => e.ChangeDescription).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.ChangeDescription).IsRequired(false).HasMaxLength(500);
 
                 entity.HasOne(mh => mh.Book)
                       .WithMany(b => b.ModifyHistories)
-                      .HasForeignKey(mh => mh.BookId);
+                      .HasForeignKey(mh => mh.BookId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<UserBookmark>(entity =>
@@ -101,12 +109,14 @@ namespace BookManagement.Contexts
                       .WithMany(b => b.UserBookmarks)
                       .HasForeignKey(ub => ub.BookId);
             });
+
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin" },
                 new Role { Id = 2, Name = "User" }
-    );
+            );
         }
     }
+
     #region User
     public class User
     {
@@ -114,6 +124,7 @@ namespace BookManagement.Contexts
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public ICollection<Book> Books { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<ModifyHistory> ModifyHistories { get; set; }
         public ICollection<UserBookmark> UserBookmarks { get; set; }
@@ -136,6 +147,7 @@ namespace BookManagement.Contexts
         public Role Role { get; set; }
     }
     #endregion
+
     #region Book
     public class Book
     {
@@ -144,11 +156,13 @@ namespace BookManagement.Contexts
         public string Artist { get; set; }
         public string Type { get; set; }
         public DateTime CreateAt { get; set; }
+        public int CreateBy { get; set; }
+        public User User { get; set; }
         public ICollection<ModifyHistory> ModifyHistories { get; set; }
         public ICollection<UserBookmark> UserBookmarks { get; set; }
     }
-
     #endregion
+
     #region Link
     public class UserBookmark
     {
@@ -160,6 +174,7 @@ namespace BookManagement.Contexts
         public User User { get; set; }
         public Book Book { get; set; }
     }
+
     public class ModifyHistory
     {
         public int Id { get; set; }

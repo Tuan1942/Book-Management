@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookManagement.Migrations
 {
     [DbContext(typeof(BMContext))]
-    [Migration("20240717034526_UserPasswordNvarchar(max)")]
-    partial class UserPasswordNvarcharmax
+    [Migration("20240719023603_Modify Description nullable")]
+    partial class ModifyDescriptionnullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace BookManagement.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CreateBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -52,6 +55,11 @@ namespace BookManagement.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreateBy");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Books");
                 });
@@ -68,7 +76,6 @@ namespace BookManagement.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ChangeDescription")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -180,18 +187,29 @@ namespace BookManagement.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("BookManagement.Contexts.Book", b =>
+                {
+                    b.HasOne("BookManagement.Contexts.User", "User")
+                        .WithMany("Books")
+                        .HasForeignKey("CreateBy")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BookManagement.Contexts.ModifyHistory", b =>
                 {
                     b.HasOne("BookManagement.Contexts.Book", "Book")
                         .WithMany("ModifyHistories")
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BookManagement.Contexts.User", "User")
                         .WithMany("ModifyHistories")
                         .HasForeignKey("ModifiedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Book");
@@ -251,6 +269,8 @@ namespace BookManagement.Migrations
 
             modelBuilder.Entity("BookManagement.Contexts.User", b =>
                 {
+                    b.Navigation("Books");
+
                     b.Navigation("ModifyHistories");
 
                     b.Navigation("UserBookmarks");

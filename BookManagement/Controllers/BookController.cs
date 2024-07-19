@@ -61,7 +61,7 @@ namespace BookManagement.Controllers
             }
         }
 
-        //[Authorize(Policy = "AdminOnly")]
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> NewBookAsync([FromBody] BookModel bookModel)
         {
@@ -76,6 +76,7 @@ namespace BookManagement.Controllers
                 Name = bookModel.Name,
                 Artist = bookModel.Artist,
                 CreateAt = DateTime.Now,
+                CreateBy = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value),
                 Type = bookModel.Type,
             };
             Directory.CreateDirectory(path);
@@ -85,33 +86,34 @@ namespace BookManagement.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateBookAsync([FromBody] BookUpdateModel bookUpdate)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBookAsync(int id, BookModel bookModel)
         {
-            if (bookUpdate.bookModel == null) return BadRequest("Book cannot be null.");
+            if (bookModel == null) return BadRequest("Book cannot be null.");
 
-            var book = _context.Books.FirstOrDefault(b => b.Name == bookUpdate.bookModel.Name);
+            var book = _context.Books.FirstOrDefault(b => b.Id == id);
 
             if (book == null) return BadRequest("Book not found.");
 
-            book.Name = bookUpdate.bookModel.Name;
-            book.Artist = bookUpdate.bookModel.Artist;
-            book.Type = bookUpdate.bookModel.Type;
+            book.Name = bookModel.Name;
+            book.Artist = bookModel.Artist;
+            book.Type = bookModel.Type;
             _context.Update(book);
             await _context.SaveChangesAsync();
 
+            var userId = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             ModifyHistory modifyHistory = new ModifyHistory
             {
                 BookId = book.Id,
-                ModifiedBy = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value),
+                ModifiedBy = userId,
                 ModifiedAt = DateTime.Now,
-                ChangeDescription = bookUpdate.description
+                ChangeDescription = $"Update at {DateTime.Now} by user {userId}"
             };
 
             _context.ModifyHistories.Add(modifyHistory);
             await _context.SaveChangesAsync();
 
-            return Ok(bookUpdate);
+            return Ok(book);
         }
 
         [Authorize(Policy = "AdminOnly")]
